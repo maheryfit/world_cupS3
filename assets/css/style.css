@@ -18,7 +18,7 @@
     transition: all .5s ease-in;
 }
 .nav-link:hover::before {
-    width: 100%;
+    width: 70%;
     border: 1px solid #cc0000;
 }
 
@@ -33,6 +33,28 @@ section {
     position: relative;
 }
 
-.stretched-link {
+.score {
+    font-size: larger;
+    font-weight: 700;
+}
 
+.team {
+    font-size: large;
+}
+
+.win {
+    color: #2eb82e;
+}
+
+.loose {
+    color: #e60000;
+}
+
+.draw {
+    color: #666666;
+}
+
+.separator {
+    font-size: xx-large;
+    font-weight: 500;
 }
