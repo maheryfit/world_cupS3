@@ -1,0 +1,22 @@
+.nav-link {
+    color: #cc0000 !important;
+    position: relative;
+    text-align: center;
+}
+.nav-link::before {
+    content: '';
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    border: 0px solid #cc0000;
+    -webkit-transition: all .5s ease-in;
+    -moz-transition: all .5s ease-in;
+    -ms-transition: all .5s ease-in;
+    -o-transition: all .5s ease-in;
+    transition: all .5s ease-in;
+}
+.nav-link:hover::before {
+    width: 100%;
+    border: 1px solid #cc0000;
+}
