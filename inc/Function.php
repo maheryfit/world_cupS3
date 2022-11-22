@@ -66,20 +66,20 @@ function getstatequipeinamatch($scorequipe, $scoreadva)
 function generateallmatchesandscore($connection)
 {   
     //generation 48 matchs
-    for ($i=0; $i <= 7; $i++) { 
-        $equipes = getequipesofgroupe($connection, $i); //1, 2, 3, 4
+    for ($i=0; $i < 7; $i++) { 
+        $equipes = getequipesofgroupe($connection, $i+1); //1, 2, 3, 4
         $compteurarrangement = count($equipes); //4
         $min = 0;
         $compteurrencontre = 0;
 
-        for ($j=1; $j < count($equipes); $j++)
+        for ($j=0; $j < count($equipes); $j++)
         {
             for ($k=2+ $min + ($compteurarrangement*$i); $k <= ($compteurarrangement*($i+1)); $k++) { 
                 $idEquipe1 = $equipes[$j]['idEquipe'];
                 $idEquipe2 = $k;
 
                 try {       
-                    $sqlrencontre = "INSERT INTO Rencontre (idEquipe1, id1Equipe2, dateRencontre) VALUES (?,?,curDate())";
+                    $sqlrencontre = "INSERT INTO Rencontre (idEquipe1, idEquipe2, dateRencontre) VALUES (?,?,curDate())";
                     $stmt = $connection->prepare($sqlrencontre);
                     $stmt->execute([$idEquipe1, $idEquipe2]);
                 }
@@ -88,10 +88,9 @@ function generateallmatchesandscore($connection)
                         echo 'N° : '.$e->getCode(); 
                 }
                 
-                
-
+                $compteurrencontre = $compteurrencontre + 1;
                 // Score equipe 1
-                $sqlscoreequipe1 = "INSERT INTO Score (idRencontre, idEquipe, val) VALUES (?,?,?))";
+                $sqlscoreequipe1 = "INSERT INTO Score (idRencontre, idEquipe, val) VALUES (?,?,?)";
                 $idRencontre = $compteurrencontre;
                 $idEquipe = $idEquipe1;
                 $val1 = rand(0, 7);
@@ -99,7 +98,7 @@ function generateallmatchesandscore($connection)
                 $stmt->execute([$idRencontre, $idEquipe, $val1]);
 
                 // Score equipe 2
-                $sqlscoreequipe2 = "INSERT INTO Score (idRencontre, idEquipe, val) VALUES (?,?,?))";
+                $sqlscoreequipe2 = "INSERT INTO Score (idRencontre, idEquipe, val) VALUES (?,?,?)";
                 $idRencontre = $compteurrencontre;
                 $idEquipe = $idEquipe2;
                 $val2 = rand(0, 7);
@@ -129,7 +128,7 @@ function generateallmatchesandscore($connection)
 
 
 
-                $compteurrencontre = $compteurrencontre + 1;
+                
             }
             $min = $min + 1;
 

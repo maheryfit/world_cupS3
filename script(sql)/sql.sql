@@ -79,6 +79,7 @@ INSERT INTO Equipe VALUES('',3,'Mexique');
 INSERT INTO Equipe VALUES('',3,'Pologne');
 INSERT INTO Equipe VALUES('',4,'France');
 INSERT INTO Equipe VALUES('',4,'Australie');
+INSERT INTO Equipe VALUES('',4,'Danemark');
 INSERT INTO Equipe VALUES('',4,'Tunisie');
 INSERT INTO Equipe VALUES('',5,'Espagne');
 INSERT INTO Equipe VALUES('',5,'Costa Rica');
