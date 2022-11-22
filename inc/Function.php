@@ -34,27 +34,43 @@ function getstatequipeinamatch($scorequipe, $scoreadva)
     $stat = array();
     if ($scorequipe < $scoreadva) 
     {
-        $stat['libele'] = "Resy";
+        $stat['libele'] = "win";
         $stat['point'] = 0;
     }
     elseif ($scorequipe > $scoreadva) 
     {
-        $stat['libele'] = "Nandresy";
+        $stat['libele'] = "loose";
         $stat['point'] = 3;
     }
     elseif ($scorequipe == $scoreadva) 
     {
-        $stat['libele'] = "Sahala";
+        $stat['libele'] = "draw";
         $stat['point'] = 1;
     }
     return $stat;
+}
+
+function getwinorloose($scorequipe, $scoreadva)
+{
+    if ($scorequipe < $scoreadva) 
+    {
+        return "loose";
+    }
+    elseif ($scorequipe > $scoreadva) 
+    {
+        return "win";
+    }
+    elseif ($scorequipe == $scoreadva) 
+    {
+        return "draw";
+    }
 }
 
 function generateallmatchesandscore($connection)
 {   
     //generation 48 matchs
     $compteurrencontre = 0;
-    for ($i=0; $i < 7; $i++) { 
+    for ($i=0; $i < 8; $i++) { 
         $equipes = getequipesofgroupe($connection, $i+1); //1, 2, 3, 4
         $compteurarrangement = count($equipes); //4
         $min = 0;
@@ -132,7 +148,7 @@ function getclassement ($connection, $idGroupe) {
     //echo $bdd;
     $sqlclassement = "SELECT * from v_classement where idGroupe = '%s' order by points desc";
     $sqlclassement = sprintf($sqlclassement, $idGroupe);
-    var_dump($sqlclassement);
+    //var_dump($sqlclassement);
 
     $requete = $connection->query($sqlclassement);
     $requete->setFetchMode(PDO::FETCH_ASSOC);
@@ -147,9 +163,9 @@ function getclassement ($connection, $idGroupe) {
 
 function getdetailsscoregroupe ($connection, $idGroupe) {
     //echo $bdd;
-    $sqlclassement = "select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = '%s' order by rencontre.idRencontre;";
+    $sqlclassement = "select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = '%s' order by rencontre.idRencontre";
     $sqlclassement = sprintf($sqlclassement, $idGroupe);
-    var_dump($sqlclassement);
+    //var_dump($sqlclassement);
 
     $requete = $connection->query($sqlclassement);
     $requete->setFetchMode(PDO::FETCH_ASSOC);
@@ -160,5 +176,54 @@ function getdetailsscoregroupe ($connection, $idGroupe) {
     }
     $requete->closeCursor();
     return $val;
+}
+
+function reinitialiser($connection)
+{
+
+    $statementsdrop = [
+        'drop table Stat;',
+        'drop table Score;',
+        'drop table Rencontre;'
+    ];
+    foreach ($statementsdrop as $statementsuppression) {
+        $connection->exec($statementsuppression);
+    }
+
+    $statementscreate = [
+        'CREATE TABLE IF NOT EXISTS Rencontre (
+            idRencontre int NOT NULL AUTO_INCREMENT,
+            idEquipe1 int NOT NULL, 
+            idEquipe2 int NOT NULL, 
+            dateRencontre Date, 
+            FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+            FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+            PRIMARY KEY (idRencontre)
+          ) ENGINE=InnoDB DEFAULT CHARSET=latin1;',
+        'CREATE TABLE IF NOT EXISTS Score (
+            idScore int NOT NULL AUTO_INCREMENT,
+            idRencontre int NOT NULL, 
+            idEquipe int NOT NULL, 
+            val int,
+            FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+            FOREIGN KEY (idRencontre) REFERENCES Rencontre(idRencontre),
+            PRIMARY KEY (idScore)
+          ) ENGINE=InnoDB DEFAULT CHARSET=latin1;',
+        'CREATE TABLE IF NOT EXISTS Stat (
+            idStat int NOT NULL AUTO_INCREMENT,
+            idRencontre int NOT NULL, 
+            idEquipe int NOT NULL, 
+            libele varchar(20),
+            pointCdm int,
+            FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+            FOREIGN KEY (idRencontre) REFERENCES Rencontre(idRencontre),
+            PRIMARY KEY (idStat)
+          ) ENGINE=InnoDB DEFAULT CHARSET=latin1;'
+        ];
+
+    foreach ($statementscreate as $statementcreation) {
+        $connection->exec($statementcreation);
+    }
+    
 }
 ?>

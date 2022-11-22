@@ -9,6 +9,12 @@
 -- drop table Equipe;
 -- drop table Groupe;
 
+-- truncate table Groupe;
+-- truncate table Equipe;
+-- truncate table Rencontre;
+-- truncate table Score;
+-- truncate table Stat;
+
 CREATE TABLE IF NOT EXISTS Groupe (
   idGroupe int NOT NULL AUTO_INCREMENT, 
   nomGroupe varchar(40) NOT NULL,

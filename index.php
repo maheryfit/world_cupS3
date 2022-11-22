@@ -40,6 +40,8 @@
               </div>
               <div class="section-body">
                 <a href="traitement-generer-match.php"><button>Generer matchs</button></a>
+                <a href="traitement-reinitialisation.php"><button>Reinitialiser</button></a>
+
               </div>
       
               <div class="row gy-4">

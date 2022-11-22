@@ -67,9 +67,9 @@
             <div class="d-flex row text-center justify-content-center py-3 mb-5 align-items-center">
             
                 <div class="col-md-1 team"><?php echo $detailsscoregroupe[$i]['nomEquipe']; ?> </div>
-                <div class="col-md-1 score win"><?php echo $detailsscoregroupe[$i]['val']; ?> </div>
+                <div class="col-md-1 score <?php echo getwinorloose($detailsscoregroupe[$i]['val'], $detailsscoregroupe[$i+1]['val']); ?>"><?php echo $detailsscoregroupe[$i]['val']; ?> </div>
                 <div class="col-md-1 separator">-</div>
-                <div class="col-md-1 score loose"><?php echo $detailsscoregroupe[$i+1]['val']; ?></div>
+                <div class="col-md-1 score <?php echo getwinorloose($detailsscoregroupe[$i+1]['val'], $detailsscoregroupe[$i]['val']); ?>"><?php echo $detailsscoregroupe[$i+1]['val']; ?></div>
                 <div class="col-md-1 team"><?php echo $detailsscoregroupe[$i+1]['nomEquipe']; ?> </div>
             </div>
         <?php
