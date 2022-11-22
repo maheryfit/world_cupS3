@@ -1,7 +1,7 @@
---CREATE USER coupedumonde@localhost IDENTIFIED BY 'coupedumonde';  
---CREATE DATABASE IF NOT EXISTS coupedumonde;
---GRANT ALL PRIVILEGES ON coupedumonde.* to coupedumonde@localhost;
---use coupedumonde;
+-- CREATE USER coupedumonde@localhost IDENTIFIED BY 'coupedumonde';  
+-- CREATE DATABASE IF NOT EXISTS coupedumonde;
+-- GRANT ALL PRIVILEGES ON coupedumonde.* to coupedumonde@localhost;
+-- use coupedumonde;
 
 -- drop table Stat;
 -- drop table Score;
@@ -106,4 +106,4 @@ INSERT INTO Equipe VALUES('',8,'Coree du Sud');
 
 create or replace view v_classement as select groupe.nomGroupe, groupe.idGroupe, equipe.nomEquipe, stat.idEquipe, sum(pointCdm) as points from stat join equipe on equipe.idEquipe = stat.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe group by stat.idEquipe;
 
-select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = 1 order by rencontre.idRencontre;
+-- select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = 1 order by rencontre.idRencontre;

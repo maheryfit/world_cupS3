@@ -58,3 +58,24 @@ section {
     font-size: xx-large;
     font-weight: 500;
 }
+
+.section-body {
+    border-collapse: collapse;
+    width: 80%;
+}
+.section-body td, .section-body th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.section-body th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #cc0000;
+    color: white;
+}
+
+.section-body tr:nth-child(even){background-color: #f2f2f2;}
+
+.section-body tr:hover {background-color: #ddd;}
