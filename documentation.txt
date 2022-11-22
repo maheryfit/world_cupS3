@@ -1,0 +1,6 @@
+Note : 
+- aza mampiasa an'ilay source raha mbola tsy misy an'ilay user sy database créés ao aminareo (commentaires ilay izy ao)
+- rehefa mampiasa an'ireo fonction dia mila jerena tsara ilay fomba ni-fetch-avana azy (PDO::FETCH_OBJ, PDO::FETCH_ASSOC, sns)
+	. rehefa milalao an'ilay tableau dia miova ny syntaxe :
+		_ FETCH_OBJ : tabobj->attribut
+		_ FETCH_ASSOC : tabobj['attribut']
