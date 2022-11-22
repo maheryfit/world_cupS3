@@ -4,3 +4,4 @@ Note :
 	. rehefa milalao an'ilay tableau dia miova ny syntaxe :
 		_ FETCH_OBJ : tabobj->attribut
 		_ FETCH_ASSOC : tabobj['attribut']
+- ilay sql.sql io no apesaina (ao anaty script (SQL))
