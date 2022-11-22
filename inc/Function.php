@@ -73,9 +73,7 @@ function generateallmatchesandscore($connection)
     for ($i=0; $i < 8; $i++) { 
         $equipes = getequipesofgroupe($connection, $i+1); //1, 2, 3, 4
         $compteurarrangement = count($equipes); //4
-        $min = 0;
-        
-
+        $min = 0;   
         for ($j=0; $j < count($equipes); $j++)
         {
             for ($k=2+ $min + ($compteurarrangement*$i); $k <= ($compteurarrangement*($i+1)); $k++) { 
@@ -128,20 +126,11 @@ function generateallmatchesandscore($connection)
                 $libele = $statequipe2['libele'];
                 $stmt = $connection->prepare($sqlstatequipe2);
                 $stmt->execute([$idRencontre, $idEquipe, $libele, $pointCdm]);
-
-
-
-
-                
             }
             $min = $min + 1;
-
         } 
-       
         echo "Matchs du groupe " . $i . "inserés";
     }
-    
-    
 }
 
 function getclassement ($connection, $idGroupe) {

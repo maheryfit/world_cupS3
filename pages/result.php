@@ -22,8 +22,8 @@
 </head>
 <body>
     <div class="container">
-        <header class="d-flex flex-wrap justify-content py-3 mb-4 border-bottom">
-            <a href="../index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="../index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <span class="fs-4 title">Qatar 2022</span>
             </a>
             <ul class="nav nav-pills">
@@ -70,6 +70,14 @@
         <?php
             }
         ?>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md mb-0 text-muted">&copy; 2022 ITU ETU1821 - ETU1919 - ETU1381</p>
+            <ul class="nav col-md-4 mb-0 justify-content-end">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+            </ul>
+        </footer>
     </div>
 </body>
 </html>

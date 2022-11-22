@@ -35,13 +35,12 @@
             <div class="container" data-aos="fade-up">
       
               <div class="section-header">
-                <!-- <span>Stage Group</span> -->
+                <span>Stage Group</span>
                 <h2>Stage Group</h2>
               </div>
               <div class="section-body">
-                <a href="traitement-generer-match.php"><button>Generer matchs</button></a>
-                <a href="traitement-reinitialisation.php"><button>Reinitialiser</button></a>
-
+                <a href="traitement-generer-match.php"><button class="btn btn-primary">Generer matchs</button></a>
+                <a href="traitement-reinitialisation.php"><button class="btn btn-danger">Reinitialiser</button></a>
               </div>
       
               <div class="row gy-4">
