@@ -61,7 +61,7 @@ section {
 
 .section-body {
     border-collapse: collapse;
-    width: 80%;
+    width: 50%;
 }
 .section-body td, .section-body th {
     border: 1px solid #ddd;
