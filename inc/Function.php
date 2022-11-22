@@ -29,19 +29,6 @@ function getequipesofgroupe($connection, $idgroupe)
     return $val;
 }
 
-function getGroupeEquipe ($connection) {
-    //echo $bdd;
-    $requete = $connection->query("SELECT * from groupe natural join equipe");
-    $requete->setFetchMode(PDO::FETCH_OBJ);
-    $val = array();
-    while($donne = $requete->fetch()){ 
-        //echo $donne->categorie;
-        $val[] = $donne;
-    }
-    $requete->closeCursor();
-    return $val;
-}
-
 function getstatequipeinamatch($scorequipe, $scoreadva)
 {
     $stat = array();
@@ -66,17 +53,18 @@ function getstatequipeinamatch($scorequipe, $scoreadva)
 function generateallmatchesandscore($connection)
 {   
     //generation 48 matchs
+    $compteurrencontre = 0;
     for ($i=0; $i < 7; $i++) { 
         $equipes = getequipesofgroupe($connection, $i+1); //1, 2, 3, 4
         $compteurarrangement = count($equipes); //4
         $min = 0;
-        $compteurrencontre = 0;
+        
 
         for ($j=0; $j < count($equipes); $j++)
         {
             for ($k=2+ $min + ($compteurarrangement*$i); $k <= ($compteurarrangement*($i+1)); $k++) { 
-                $idEquipe1 = $equipes[$j]['idEquipe'];
-                $idEquipe2 = $k;
+                $idEquipe1 = $equipes[$j]['idEquipe']; //id
+                $idEquipe2 = $k;    //compteur
 
                 try {       
                     $sqlrencontre = "INSERT INTO Rencontre (idEquipe1, idEquipe2, dateRencontre) VALUES (?,?,curDate())";
@@ -140,4 +128,37 @@ function generateallmatchesandscore($connection)
     
 }
 
+function getclassement ($connection, $idGroupe) {
+    //echo $bdd;
+    $sqlclassement = "SELECT * from v_classement where idGroupe = '%s' order by points desc";
+    $sqlclassement = sprintf($sqlclassement, $idGroupe);
+    var_dump($sqlclassement);
+
+    $requete = $connection->query($sqlclassement);
+    $requete->setFetchMode(PDO::FETCH_ASSOC);
+    $val = array();
+    while($donne = $requete->fetch()){ 
+        //echo $donne->categorie;
+        $val[] = $donne;
+    }
+    $requete->closeCursor();
+    return $val;
+}
+
+function getdetailsscoregroupe ($connection, $idGroupe) {
+    //echo $bdd;
+    $sqlclassement = "select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = '%s' order by rencontre.idRencontre;";
+    $sqlclassement = sprintf($sqlclassement, $idGroupe);
+    var_dump($sqlclassement);
+
+    $requete = $connection->query($sqlclassement);
+    $requete->setFetchMode(PDO::FETCH_ASSOC);
+    $val = array();
+    while($donne = $requete->fetch()){ 
+        //echo $donne->categorie;
+        $val[] = $donne;
+    }
+    $requete->closeCursor();
+    return $val;
+}
 ?>

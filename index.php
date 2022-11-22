@@ -4,7 +4,6 @@
   require('inc/Function.php');
   $connexion = getConnection();
   $groupeonly = getGroupe($connexion);
-  $groupeandteam = getGroupeEquipe($connexion);
   
 ?>
 
@@ -50,7 +49,7 @@
                   <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
                       <ul class="list-group list-group-flush">
-                          <h3><a href="./pages/result.html" class="stretched-link"><?php echo $groupe->nomGroupe; ?> </a></h3>
+                          <h3><a href="./pages/result.php?idGroupe=<?php echo $groupe->idGroupe;?>" class="stretched-link"><?php echo $groupe->nomGroupe; ?> </a></h3>
                           <?php 
                             $equipes = getequipesofgroupe($connexion, $groupe->idGroupe);
                             foreach ($equipes as $equipe) {

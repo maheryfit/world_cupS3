@@ -97,3 +97,7 @@ INSERT INTO Equipe VALUES('',8,'Portugal');
 INSERT INTO Equipe VALUES('',8,'Ghana');
 INSERT INTO Equipe VALUES('',8,'Uruguay');
 INSERT INTO Equipe VALUES('',8,'Coree du Sud');
+
+create or replace view v_classement as select groupe.nomGroupe, groupe.idGroupe, equipe.nomEquipe, stat.idEquipe, sum(pointCdm) as points from stat join equipe on equipe.idEquipe = stat.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe group by stat.idEquipe;
+
+select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = 1 order by rencontre.idRencontre;

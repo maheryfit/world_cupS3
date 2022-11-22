@@ -4,6 +4,6 @@ require('inc/Function.php');
 $connexion = getConnection();
 
 generateallmatchesandscore($connexion);
-//header("Location: index.php");
+header("Location: index.php");
 
 ?>
