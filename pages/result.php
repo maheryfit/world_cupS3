@@ -7,6 +7,7 @@
   $groupeonly = getGroupe($connexion);
   $classement = getclassement($connexion, $idGroupe);
   $detailsscoregroupe = getdetailsscoregroupe($connexion, $idGroupe);
+  
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +23,8 @@
 </head>
 <body>
     <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="../index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <header class="d-flex flex-wrap justify-content py-3 mb-4 border-bottom">
+            <a href="../index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <span class="fs-4 title">Qatar 2022</span>
             </a>
             <ul class="nav nav-pills">
@@ -35,23 +36,27 @@
         
         <div class="section-header">
             <!-- <span>Result for GROUP A</span> -->
-            <h2>Result for <?= $classement[0]['nomGroupe']?></h2>
+            <h2>Result for <?php echo $classement[0]['nomGroupe']; ?></h2>
         </div>
 
         <!-- liste classement -->
-        <div class="d-flex justify-content-center align-items-center text-center">
-            <table class="section-body">
-                <tr>
-                    <th>Team</th>
-                    <th>Points</th>
-                </tr>
-                <?php foreach($classement as $ligneclassement) { ?>
-                    <tr>
-                      <td><?= $ligneclassement['nomEquipe']?></td>
-                      <td><?= $ligneclassement['points']?></td>  
-                    </tr>
-                <?php } ?>
-            </table>
+        <div class="section-body">
+            <?php 
+                foreach($classement as $ligneclassement)    
+                {
+            ?>
+                <h2>
+            <?php
+                    echo $ligneclassement['nomEquipe'];
+            ?>
+                </h2>
+                <span>
+            <?php
+                    echo $ligneclassement['points'];
+                }
+            ?>
+                </span>
+        
         </div>
 
         <!-- details -->
@@ -70,14 +75,6 @@
         <?php
             }
         ?>
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md mb-0 text-muted">&copy; 2022 ITU ETU1821 - ETU1919 - ETU1381</p>
-            <ul class="nav col-md-4 mb-0 justify-content-end">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Match</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-            </ul>
-        </footer>
     </div>
 </body>
 </html>

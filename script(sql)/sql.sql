@@ -1,19 +1,31 @@
--- CREATE USER coupedumonde@localhost IDENTIFIED BY 'coupedumonde';  
--- CREATE DATABASE IF NOT EXISTS coupedumonde;
--- GRANT ALL PRIVILEGES ON coupedumonde.* to coupedumonde@localhost;
--- use coupedumonde;
+--CREATE USER coupedumonde@localhost IDENTIFIED BY 'coupedumonde';  
+--CREATE DATABASE IF NOT EXISTS coupedumonde;
+--GRANT ALL PRIVILEGES ON coupedumonde.* to coupedumonde@localhost;
+--use coupedumonde;
 
 -- drop table Stat;
 -- drop table Score;
 -- drop table Rencontre;
 -- drop table Equipe;
 -- drop table Groupe;
+-- drop table scoretroisieme;
+-- drop table Troisieme;
+-- drop table ScoreQuatrieme;
+-- drop table scoreFinale;
+-- drop table Finale;
+-- drop table scoredemi;
+-- drop table Demi;
+-- drop table scorehuitieme;
+-- drop table huitieme;
+
 
 -- truncate table Groupe;
 -- truncate table Equipe;
 -- truncate table Rencontre;
 -- truncate table Score;
 -- truncate table Stat;
+-- truncate table Huitieme;
+
 
 CREATE TABLE IF NOT EXISTS Groupe (
   idGroupe int NOT NULL AUTO_INCREMENT, 
@@ -106,4 +118,115 @@ INSERT INTO Equipe VALUES('',8,'Coree du Sud');
 
 create or replace view v_classement as select groupe.nomGroupe, groupe.idGroupe, equipe.nomEquipe, stat.idEquipe, sum(pointCdm) as points from stat join equipe on equipe.idEquipe = stat.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe group by stat.idEquipe;
 
--- select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = 1 order by rencontre.idRencontre;
+select * from rencontre join score on score.idRencontre = rencontre.idRencontre join equipe on equipe.idEquipe = score.idEquipe join groupe on groupe.idGroupe = equipe.idGroupe where equipe.idGroupe = 1 order by rencontre.idRencontre;
+
+CREATE TABLE IF NOT EXISTS Huitieme (
+  idHuitieme int NOT NULL AUTO_INCREMENT,
+  idEquipe1 int NOT NULL, 
+  idEquipe2 int NOT NULL, 
+  dateRencontre Date, 
+  FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+  PRIMARY KEY (idHuitieme)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Scorehuitieme (
+  idScorehuitieme int NOT NULL AUTO_INCREMENT,
+  idHuitieme int NOT NULL, 
+  idEquipe int NOT NULL, 
+  val int,
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idHuitieme) REFERENCES Huitieme(idHuitieme),
+  PRIMARY KEY (idScorehuitieme)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Quatrieme (
+  idQuatrieme int NOT NULL AUTO_INCREMENT,
+  idEquipe1 int NOT NULL, 
+  idEquipe2 int NOT NULL, 
+  dateRencontre Date, 
+  FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+  PRIMARY KEY (idQuatrieme)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Scorequatrieme (
+  idScorequatrieme int NOT NULL AUTO_INCREMENT,
+  idQuatrieme int NOT NULL, 
+  idEquipe int NOT NULL, 
+  val int,
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idQuatrieme) REFERENCES Quatrieme(idQuatrieme),
+  PRIMARY KEY (idScorequatrieme)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Demi (
+  idDemi int NOT NULL AUTO_INCREMENT,
+  idEquipe1 int NOT NULL, 
+  idEquipe2 int NOT NULL, 
+  dateRencontre Date, 
+  FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+  PRIMARY KEY (idDemi)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS ScoreDemi (
+  idScoredemi int NOT NULL AUTO_INCREMENT,
+  idDemi int NOT NULL, 
+  idEquipe int NOT NULL, 
+  val int,
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idDemi) REFERENCES Demi(idDemi),
+  PRIMARY KEY (idScoredemi)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Finale (
+  idFinale int NOT NULL AUTO_INCREMENT,
+  idEquipe1 int NOT NULL, 
+  idEquipe2 int NOT NULL, 
+  dateRencontre Date, 
+  FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+  PRIMARY KEY (idFinale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS ScoreFinale (
+  idScorefinale int NOT NULL AUTO_INCREMENT,
+  idFinale int NOT NULL, 
+  idEquipe int NOT NULL, 
+  val int,
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idFinale) REFERENCES Finale(idFinale),
+  PRIMARY KEY (idScorefinale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS Troisieme (
+  idTroisieme int NOT NULL AUTO_INCREMENT,
+  idEquipe1 int NOT NULL, 
+  idEquipe2 int NOT NULL, 
+  dateRencontre Date, 
+  FOREIGN KEY (idEquipe1) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idEquipe2) REFERENCES Equipe(idEquipe),
+  PRIMARY KEY (idTroisieme)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS ScoreTroisieme (
+  idScorefinale int NOT NULL AUTO_INCREMENT,
+  idTroisieme int NOT NULL, 
+  idEquipe int NOT NULL, 
+  val int,
+  FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+  FOREIGN KEY (idTroisieme) REFERENCES Troisieme(idTroisieme),
+  PRIMARY KEY (idScorefinale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS Stathuitieme (
+--   idStathuitieme int NOT NULL AUTO_INCREMENT,
+--   idHuitieme int NOT NULL, 
+--   idEquipe int NOT NULL, 
+--   libele varchar(20),
+--   pointCdm int,
+--   FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+--   FOREIGN KEY (idHuitieme) REFERENCES Huitieme(idHuitieme),
+--   PRIMARY KEY (idStathuitieme)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

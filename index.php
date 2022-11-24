@@ -25,6 +25,7 @@
                 <span class="fs-4 title">Qatar 2022</span>
                 
             </a>
+            
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Match</a></li>
@@ -35,12 +36,14 @@
             <div class="container" data-aos="fade-up">
       
               <div class="section-header">
-                <span>Stage Group</span>
+                <!-- <span>Stage Group</span> -->
                 <h2>Stage Group</h2>
               </div>
               <div class="section-body">
                 <a href="traitement-generer-match.php"><button class="btn btn-primary">Generer matchs</button></a>
                 <a href="traitement-reinitialisation.php"><button class="btn btn-danger">Reinitialiser</button></a>
+                <a href="traitement-generer-vainqueur.php"><button class="btn btn-primary">Generer Vainqueur</button></a>
+                <a href="traitement-reinitialisation-vainqueur.php"><button class="btn btn-danger">Reinitialiser Vainqueur</button></a>
               </div>
       
               <div class="row gy-4">
