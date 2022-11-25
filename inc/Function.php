@@ -397,6 +397,29 @@ function genererquatriemeandscore($connection)
 
 }
 
+function getparticipantsquatrieme($connection)
+{
+    $sqlclassement = "SELECT * from scorequatrieme join equipe on scorequatrieme.idEquipe = equipe.idEquipe";
+    $sqlclassement = sprintf($sqlclassement);
+    //var_dump($sqlclassement);
+
+    $requete = $connection->query($sqlclassement);
+    $requete->setFetchMode(PDO::FETCH_ASSOC);
+    $val = array();
+    while($donne = $requete->fetch()){ 
+        //echo $donne->categorie;
+        $val[] = $donne;
+    }
+    $requete->closeCursor();
+
+    $gagnantsquatrieme = array();
+    for ($i=0; $i < count($val); $i=$i+1) 
+    { 
+        $gagnantsquatrieme[] = $val[$i];
+    }
+    return $gagnantsquatrieme;
+}
+
 function getgagnantsquatrieme($connection)
 {
     $sqlclassement = "SELECT * from scorequatrieme join equipe on scorequatrieme.idEquipe = equipe.idEquipe";
@@ -484,6 +507,29 @@ function genererdemiandscore($connection)
         }
     }
 
+}
+
+function getparticipantsdemi($connection)
+{
+    $sqlclassement = "SELECT * from scoredemi join equipe on scoredemi.idEquipe = equipe.idEquipe";
+    $sqlclassement = sprintf($sqlclassement);
+    //var_dump($sqlclassement);
+
+    $requete = $connection->query($sqlclassement);
+    $requete->setFetchMode(PDO::FETCH_ASSOC);
+    $val = array();
+    while($donne = $requete->fetch()){ 
+        //echo $donne->categorie;
+        $val[] = $donne;
+    }
+    $requete->closeCursor();
+
+    $gagnantsquatrieme = array();
+    for ($i=0; $i < count($val); $i=$i+1) 
+    { 
+        $gagnantsquatrieme[] = $val[$i];
+    }
+    return $gagnantsquatrieme;
 }
 
 function getgagnantsdemi($connection)
@@ -575,7 +621,7 @@ function genererfinaleandscore($connection)
 
 }
 
-function getgagnantfinale($connection)
+function getparticipantsfinale($connection)
 {
     $sqlclassement = "SELECT * from scorefinale join equipe on scorefinale.idEquipe = equipe.idEquipe";
     $sqlclassement = sprintf($sqlclassement);
@@ -592,6 +638,29 @@ function getgagnantfinale($connection)
 
     $resultatfinale = array();
     for ($i=0; $i < count($val); $i++) 
+    { 
+        $resultatfinale[] = $val[$i];
+    }
+    return $resultatfinale;
+}
+
+function getgagnantfinale($connection)
+{
+    $sqlclassement = "SELECT * from scorefinale join equipe on scorefinale.idEquipe = equipe.idEquipe order by val desc";
+    $sqlclassement = sprintf($sqlclassement);
+    //var_dump($sqlclassement);
+
+    $requete = $connection->query($sqlclassement);
+    $requete->setFetchMode(PDO::FETCH_ASSOC);
+    $val = array();
+    while($donne = $requete->fetch()){ 
+        //echo $donne->categorie;
+        $val[] = $donne;
+    }
+    $requete->closeCursor();
+
+    $resultatfinale = array();
+    for ($i=0; $i < 1; $i++) 
     { 
         if ($val[$i]['val'] < $val[$i+1]['val']) 
         {
@@ -683,7 +752,7 @@ function generertroisiemeandscore($connection)
         // Score equipe 2
         try
         {
-            $sqlscoreequipe2 = "INSERT INTO Scorefinale (idTroisieme, idEquipe, val) VALUES (?,?,?)";
+            $sqlscoreequipe2 = "INSERT INTO Scoretroisieme (idTroisieme, idEquipe, val) VALUES (?,?,?)";
             $idTroisieme = $compteurrencontre;
             $idEquipe = $participantsfinale[$i+1]['idEquipe'];
             $val2 = rand(0, 7);

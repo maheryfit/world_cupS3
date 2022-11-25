@@ -6,8 +6,6 @@
 -- drop table Stat;
 -- drop table Score;
 -- drop table Rencontre;
--- drop table Equipe;
--- drop table Groupe;
 -- drop table scoretroisieme;
 -- drop table Troisieme;
 -- drop table ScoreQuatrieme;
@@ -17,7 +15,9 @@
 -- drop table Demi;
 -- drop table scorehuitieme;
 -- drop table huitieme;
-
+-- drop table Quatrieme;
+-- drop table Equipe;
+-- drop table Groupe;
 
 -- truncate table Groupe;
 -- truncate table Equipe;

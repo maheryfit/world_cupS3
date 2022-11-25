@@ -5,10 +5,12 @@
   $connexion = getConnection();
   $groupeonly = getGroupe($connexion);
   $participantshuitieme = getparticipantshuitieme($connexion);
-  $participantsquatrieme = getgagnantshuitieme($connexion);
-  $participantsdemi = getgagnantsquatrieme($connexion);
-  $participantsfinale = getgagnantsdemi($connexion);
+  $participantsquatrieme = getparticipantsquatrieme($connexion);
+  $participantsdemi = getparticipantsdemi($connexion);
+  $participantsfinale = getparticipantsfinale($connexion);
   $troisieme = gettroisiemeplace($connexion);
+    $grandgagnant = getgagnantfinale($connexion);
+
   
 ?>
 
@@ -38,6 +40,8 @@
         <div class="section-header">
             <span>Elimination</span>
             <h2>Elimination</h2>
+            <h2>Le grand gagnant est : <?php echo $grandgagnant[0]['nomEquipe']; ?> </h2>
+
           </div>
         <!-- <div class="section-body">
             <a href="#"><button class="btn btn-primary">Generer Vainqueur</button></a>
@@ -52,6 +56,8 @@
                     { 
                 ?>
                     <div class="team GROUPE-A"><?php echo getnomequipefromid($connexion, $participantshuitieme[$i]['idEquipe1'])[0]['nomEquipe']; ?></div>
+                    <div class="team GROUPE-A"><?php echo getnomequipefromid($connexion, $participantshuitieme[$i]['idEquipe2'])[0]['nomEquipe']; ?></div>
+
                 <?php
                     }
                 ?>
@@ -61,7 +67,7 @@
                 <!-- Quart de finale -->
                 <div class="quart m-auto">
                 <?php 
-                    for ($i=0; $i < 2; $i++) 
+                    for ($i=0; $i < 4; $i++) 
                     { 
                 ?>
                     <div class="team GROUPE-A"><?php echo $participantsquatrieme[$i]['nomEquipe']; ?></div>
@@ -73,7 +79,7 @@
                 <!-- Demi-final -->
                 <div class="demi-final m-auto">
                 <?php 
-                    for ($i=0; $i < 1; $i++) 
+                    for ($i=0; $i < 2; $i++) 
                     { 
                 ?>
                     <div class="team GROUPE-A"><?php echo $participantsdemi[$i]['nomEquipe']; ?></div>
@@ -103,6 +109,7 @@
                     for ($i=4; $i < 8; $i++) 
                     { 
                 ?>
+                    <div class="team GROUPE-A"><?php echo getnomequipefromid($connexion, $participantshuitieme[$i]['idEquipe1'])[0]['nomEquipe']; ?></div>
                     <div class="team GROUPE-A"><?php echo getnomequipefromid($connexion, $participantshuitieme[$i]['idEquipe2'])[0]['nomEquipe']; ?></div>
                 <?php
                     }
@@ -112,7 +119,7 @@
                 <!-- Quart de finale -->
                 <div class="quart m-auto">
                 <?php 
-                    for ($i=2; $i < 4; $i++) 
+                    for ($i=4; $i < 8; $i++) 
                     { 
                 ?>
                     <div class="team GROUPE-A"><?php echo $participantsquatrieme[$i]['nomEquipe']; ?></div>
@@ -124,7 +131,7 @@
                 <!-- Demi-final -->
                 <div class="demi-final m-auto">
                 <?php 
-                    for ($i=1; $i < 2; $i++) 
+                    for ($i=2; $i < 4; $i++) 
                     { 
                 ?>
                     <div class="team GROUPE-A"><?php echo $participantsdemi[$i]['nomEquipe']; ?></div>
@@ -142,7 +149,7 @@
                     
                     <!-- 3e-place -->
                     <div class="third-place m-auto">
-                        <div class="team GROUPE-C"><?php echo $troisieme[0]['nomEquipe']; ?></div>
+                        <div class="team GROUPE-C"><?php echo $troisieme[1]['nomEquipe']; ?></div>
                     </div>
                 </div>
             </div>    
