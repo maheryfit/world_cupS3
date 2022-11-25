@@ -65,13 +65,13 @@ section {
 }
 .section-body td, .section-body th {
     border: 1px solid #ddd;
+    text-align: center;
     padding: 8px;
 }
 
 .section-body th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
     background-color: #cc0000;
     color: white;
 }
@@ -152,10 +152,6 @@ section {
     cursor: pointer;
     box-shadow: 6px 6px 6px -5px black;
     opacity: 1;
-    -webkit-transition: opacity .5s ease-in;
-    -moz-transition: opacity .5s ease-in;
-    -ms-transition: opacity .5s ease-in;
-    -o-transition: opacity .5s ease-in;
     transition: opacity .5s ease-in;
 }
 

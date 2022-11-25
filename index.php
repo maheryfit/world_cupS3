@@ -3,8 +3,7 @@
   require('inc/ConnexionBase.php');
   require('inc/Function.php');
   $connexion = getConnection();
-  $groupeonly = getGroupe($connexion);
-  
+  $groupeonly = getGroupe($connexion);  
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +35,7 @@
             <div class="container" data-aos="fade-up">
       
               <div class="section-header">
-                <!-- <span>Stage Group</span> -->
+                <span>Stage Group</span>
                 <h2>Stage Group</h2>
               </div>
               <div class="section-body">

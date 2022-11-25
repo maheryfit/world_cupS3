@@ -36,6 +36,7 @@
             </ul>
         </header>
         <div class="section-header">
+            <span>Elimination</span>
             <h2>Elimination</h2>
           </div>
         <!-- <div class="section-body">

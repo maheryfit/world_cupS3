@@ -35,28 +35,24 @@
         </header>
         
         <div class="section-header">
-            <!-- <span>Result for GROUP A</span> -->
+            <span>Result for <?php echo $classement[0]['nomGroupe']; ?></span>
             <h2>Result for <?php echo $classement[0]['nomGroupe']; ?></h2>
         </div>
 
         <!-- liste classement -->
-        <div class="section-body">
-            <?php 
-                foreach($classement as $ligneclassement)    
-                {
-            ?>
-                <h2>
-            <?php
-                    echo $ligneclassement['nomEquipe'];
-            ?>
-                </h2>
-                <span>
-            <?php
-                    echo $ligneclassement['points'];
-                }
-            ?>
-                </span>
-        
+        <div class="d-flex justify-content-center align-items-center">
+            <table class="section-body">
+                <tr>
+                    <th>Nom d'&Eacute;quipe</th>
+                    <th>Nombre de points</th>
+                </tr>
+                <?php foreach($classement as $ligneclassement) { ?>
+                    <tr>
+                        <td><?=$ligneclassement['nomEquipe'];?></td>
+                        <td><?=$ligneclassement['points'];?></td>
+                    </tr>
+                <?php } ?>
+            </table>
         </div>
 
         <!-- details -->
